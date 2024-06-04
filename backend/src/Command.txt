@@ -1,0 +1,2 @@
+add-migration -context IdentityDbAppContext "Initial_Data_Identity"
+
