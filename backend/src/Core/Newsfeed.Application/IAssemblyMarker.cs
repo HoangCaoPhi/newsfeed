@@ -1,6 +1,4 @@
 ﻿namespace Newsfeed.Application;
-
-public class Class1
+public interface IAssemblyMarker
 {
-
 }

@@ -1,6 +1,4 @@
 ﻿namespace Newsfeed.Infrastructure.Persistence;
-
-public class Class1
+internal interface IAssemblyMarker
 {
-
 }
