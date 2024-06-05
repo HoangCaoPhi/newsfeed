@@ -1,4 +1,6 @@
-﻿using Mapster;
+﻿using Asp.Versioning;
+using Asp.Versioning.Builder;
+using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Newsfeed.Api.Abstractions;
@@ -35,9 +37,16 @@ public static class DependencyInjections
     {
         IEnumerable<IEndpoint> endpoints = app.Services.GetRequiredService<IEnumerable<IEndpoint>>();
 
+        ApiVersionSet apiVersionSet = app.NewApiVersionSet()
+                                 .HasApiVersion(new ApiVersion(1))
+                                 .ReportApiVersions()
+                                 .Build();
+
+        RouteGroupBuilder versionedGroup = app.MapGroup("api/v{version:apiVersion}").WithApiVersionSet(apiVersionSet);
+
         foreach (IEndpoint endpoint in endpoints)
         {
-            endpoint.MapEndpoint(app);
+            endpoint.MapEndpoint(versionedGroup);
         }
     }
 }
