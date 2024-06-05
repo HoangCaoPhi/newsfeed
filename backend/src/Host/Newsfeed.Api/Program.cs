@@ -3,6 +3,7 @@ using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newsfeed.Api;
+using Newsfeed.Api.ErrorHandling;
 using Newsfeed.Application;
 using Newsfeed.Infrastructure.Identity;
 using Newsfeed.Infrastructure.Identity.Models;
@@ -44,7 +45,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         options.SwaggerDoc(description.GroupName, new Microsoft.OpenApi.Models.OpenApiInfo()
         {
-            Title = $"Newsfeed API {description.ApiVersion}",
+            Title = $"A social media API with version {description.ApiVersion}, built by HCPHI",
             Version = description.ApiVersion.ToString()
         });
     }
@@ -53,6 +54,9 @@ builder.Services.AddSwaggerGen(options =>
 // Add services to the container.
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
@@ -91,7 +95,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 
-
+app.UseExceptionHandler();
 app.MapEndpoints();
 app.Run();
  

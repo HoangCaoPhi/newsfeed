@@ -23,7 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Newsfeed.Infrastructure.Per
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4C028363-F633-4BE5-8217-AAE305D9EA10}"
 	ProjectSection(SolutionItems) = preProject
-		Command.txt = Command.txt
+		Docs\Command.txt = Docs\Command.txt
+		Docs\docker-compose.yaml = Docs\docker-compose.yaml
 	EndProjectSection
 EndProject
 Global
