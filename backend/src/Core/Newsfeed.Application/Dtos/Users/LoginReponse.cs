@@ -16,6 +16,5 @@ public class LoginReponse
 
     public string Token { get; set; }
 
-    [JsonIgnore]
     public string RefreshToken { get; set; }
 }

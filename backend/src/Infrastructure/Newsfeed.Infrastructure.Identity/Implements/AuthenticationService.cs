@@ -43,7 +43,7 @@ public class AuthenticationService(UserManager<ApplicationUser> userManager,
             UserName = request.UserName
         };
 
-        var result = await userManager.CreateAsync(user);
+        var result = await userManager.CreateAsync(user, request.Password);
         if (result.Succeeded)
         {
             await userManager.AddToRoleAsync(user, RoleDefault.Employee.ToString());
