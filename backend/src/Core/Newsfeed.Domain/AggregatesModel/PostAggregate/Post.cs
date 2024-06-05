@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Newsfeed.Domain.AggregatesModel.CategoryAggregate;
 
 namespace Newsfeed.Domain.AggregatesModel.PostAggregate;
 public class Post : BaseEntity, IAggregateRoot
@@ -29,7 +30,7 @@ public class Post : BaseEntity, IAggregateRoot
 
     public IReadOnlyCollection<HashTag> HashTags => _hashTags?.AsReadOnly();
 
-    private readonly List<Category>? _categories;
+    private readonly List<int>? _categoryIds;
 
-    public IReadOnlyCollection<Category> Categories => _categories?.AsReadOnly();
+    public IReadOnlyCollection<int> CategoryIds => _categoryIds?.AsReadOnly();
 }
