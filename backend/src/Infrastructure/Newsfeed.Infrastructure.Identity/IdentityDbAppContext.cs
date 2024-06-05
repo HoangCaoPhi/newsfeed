@@ -44,4 +44,6 @@ public class IdentityDbAppContext(DbContextOptions<IdentityDbAppContext> options
             entity.ToTable("UserTokens");
         });
     }
+
+
 }

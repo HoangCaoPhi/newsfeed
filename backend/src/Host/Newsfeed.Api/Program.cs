@@ -1,9 +1,12 @@
 using Asp.Versioning;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newsfeed.Api;
 using Newsfeed.Application;
 using Newsfeed.Infrastructure.Identity;
+using Newsfeed.Infrastructure.Identity.Models;
+using Newsfeed.Infrastructure.Identity.Seeds;
 using Newsfeed.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddEndpoints();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -59,7 +63,15 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();
     var identityDbContext = scope.ServiceProvider.GetRequiredService<IdentityDbAppContext>();
     identityDbContext.Database.Migrate();
+
+    // seeding data
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await DefaultRoles.SeedAsync(roleManager);
+    await DefaultAdmin.SeedAsync(userManager);
 }
 
+app.MapEndpoints();
 app.Run();
  

@@ -17,7 +17,7 @@ public static class ServiceExtensions
     {
         services.AddDbContext<NewsfeedDbContext>(options =>
         {
-            var databaseMySqlOptions = configuration.GetSection(MySQLOptions.ConfigName).Get<MySQLOptions>();
+            var databaseMySqlOptions = configuration.GetSection(MySQLOptions.GetSectionName()).Get<MySQLOptions>();
             options.UseMySQL(databaseMySqlOptions.ConnectionString, dbOptions =>
             {
                 dbOptions.EnableRetryOnFailure(databaseMySqlOptions.EnableRetryOnFailure);
