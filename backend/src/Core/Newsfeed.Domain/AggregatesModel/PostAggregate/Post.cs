@@ -28,4 +28,8 @@ public class Post : BaseEntity, IAggregateRoot
     private readonly List<HashTag> _hashTags;
 
     public IReadOnlyCollection<HashTag> HashTags => _hashTags?.AsReadOnly();
+
+    private readonly List<Category>? _categories;
+
+    public IReadOnlyCollection<Category> Categories => _categories?.AsReadOnly();
 }

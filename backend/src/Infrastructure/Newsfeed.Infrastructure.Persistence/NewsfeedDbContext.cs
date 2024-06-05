@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Newsfeed.Domain.AggregatesModel.CategoryAggregate;
 using Newsfeed.Domain.AggregatesModel.PostAggregate;
 using Newsfeed.Domain.SeedWork;
 
