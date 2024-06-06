@@ -1,0 +1,73 @@
+.login {
+    background-color: rgb(238, 77, 45);
+    height: 100vh;
+    width: 100%;
+
+    .login-ground {
+        background-image: url(../../../image/Shoppe.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        margin: auto;
+        width: 1040px;
+        justify-content: flex-end;
+        display: flex;
+
+        .login-item {
+            background-color: #fff;
+            width: 400px;
+            min-height: 400px;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .14);
+            box-sizing: border-box;
+            overflow: hidden;
+            padding: 0 30px;
+            padding-bottom: 32px;
+
+
+            .item {
+                margin-bottom: 24px;
+
+                .item-name {
+                    margin-bottom: 4px;
+                }
+
+                .icon-required {
+                    color: red !important;
+                    margin-left: 4px;
+                }
+            }
+
+            .link {
+                margin: 8px 0;
+
+                .link-item {
+                    font-size: .75rem;
+                }
+            }
+
+            .line {
+                background-color: #dbdbdb;
+                flex: 1;
+                height: 1px;
+                width: 100%;
+            }
+
+            .text-line {
+                color: #ccc;
+                font-size: .75rem;
+                padding: 0 16px;
+                text-transform: uppercase;
+
+            }
+
+            .resgin {
+                color: #ee4d2d;
+                font-weight: 500;
+                font-size: .875rem;
+                margin-top: 32px;
+                cursor: pointer;
+            }
+        }
+    }
+}
