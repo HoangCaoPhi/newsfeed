@@ -1,54 +1,43 @@
-import { GitHubBanner, Refine, WelcomePage } from "@refinedev/core";
-import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
+import { Authenticated, Refine, WelcomePage } from "@refinedev/core";
+import { dataProvider } from "./providers/data-provider";
+import { authProvider } from "./providers/auth-provider";
+import { Login } from "./pages/login";
+import routerProvider from "@refinedev/react-router-v6";
+import { Navigate, Outlet, Route, Routes, BrowserRouter } from "react-router-dom";
+import { Header } from "./components";
+import { ListPosts } from "./pages/home/list";
 
-import { notificationProvider, RefineSnackbarProvider } from "@refinedev/mui";
-
-import CssBaseline from "@mui/material/CssBaseline";
-import GlobalStyles from "@mui/material/GlobalStyles";
-import routerBindings, {
-  DocumentTitleHandler,
-  UnsavedChangesNotifier,
-} from "@refinedev/react-router-v6";
-import dataProvider from "@refinedev/simple-rest";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ColorModeContextProvider } from "./contexts/color-mode";
-
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
-      <RefineKbarProvider>
-        <ColorModeContextProvider>
-          <CssBaseline />
-          <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
-          <RefineSnackbarProvider>
-            <DevtoolsProvider>
-              <Refine
-                dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
-                notificationProvider={notificationProvider}
-                routerProvider={routerBindings}
-                options={{
-                  syncWithLocation: true,
-                  warnWhenUnsavedChanges: true,
-                  useNewQueryKeys: true,
-                  projectId: "YRxXOb-UGyKMV-pvOVej",
-                }}
-              >
-                <Routes>
-                  <Route index element={<WelcomePage />} />
-                </Routes>
-                <RefineKbar />
-                <UnsavedChangesNotifier />
-                <DocumentTitleHandler />
-              </Refine>
-              <DevtoolsPanel />
-            </DevtoolsProvider>
-          </RefineSnackbarProvider>
-        </ColorModeContextProvider>
-      </RefineKbarProvider>
+      <Refine
+        dataProvider={dataProvider}
+        authProvider={authProvider}
+        routerProvider={routerProvider}
+      >
+        <Routes>
+          <Route
+            element={
+              <Authenticated key="protected" fallback={<Navigate to="/login" />}>
+                <Header />
+                <Outlet />
+              </Authenticated>
+            }
+          >
+            <Route index element={<ListPosts />} />
+          </Route>
+
+          <Route
+            element={
+              <Authenticated key="auth-pages" fallback={<Outlet />}>
+                <Navigate to="/" />
+              </Authenticated>
+            }
+          >
+            <Route path="/login" element={<Login />} />
+          </Route>
+        </Routes>
+      </Refine>
     </BrowserRouter>
   );
 }
-
-export default App;
