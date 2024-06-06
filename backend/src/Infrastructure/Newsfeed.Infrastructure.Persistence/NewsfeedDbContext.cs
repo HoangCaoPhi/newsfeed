@@ -17,6 +17,7 @@ public class NewsfeedDbContext(DbContextOptions<NewsfeedDbContext> options) : Db
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-   
+        var assembly = typeof(IAssemblyMarker).Assembly;
+        modelBuilder.ApplyConfigurationsFromAssembly(assembly);
     }
 }

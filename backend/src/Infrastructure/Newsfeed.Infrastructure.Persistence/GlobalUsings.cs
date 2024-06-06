@@ -1,4 +1,2 @@
-﻿namespace Newsfeed.Infrastructure.Persistence;
-internal class GlobalUsings
-{
-}
+﻿global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;

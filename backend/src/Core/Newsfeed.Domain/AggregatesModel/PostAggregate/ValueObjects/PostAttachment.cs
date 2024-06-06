@@ -10,11 +10,11 @@ public enum PostAttachmentType
 
 public class PostAttachment : ValueObject
 {
-    public string PostAttachmentName { get; private set; }
+    public string PostAttachmentName { get; init; }
 
-    public string? PostAttachmentExtension { get; private set; }
+    public string? PostAttachmentExtension { get; init; }
 
-    public PostAttachmentType PostAttachmentType { get; private set; }
+    public PostAttachmentType PostAttachmentType { get; init; }
 
     protected override IEnumerable<object> GetEqualityComponents()
     {
