@@ -1,0 +1,35 @@
+.flex {
+    display: flex;
+}
+
+body {
+    margin: 0 !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, 文泉驛正黑, "WenQuanYi Zen Hei", "Hiragino Sans GB", "儷黑 Pro", "LiHei Pro", "Heiti TC", 微軟正黑體, "Microsoft JhengHei UI", "Microsoft JhengHei", sans-serif;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.content-center {
+    justify-content: center;
+}
+
+.content-around {
+    justify-content: space-around;
+}
+
+.content-between {
+    justify-content: space-between;
+}
+
+a {
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    background-color: initial;
+    color: #05a;
+}
+
+.f-13{
+    font-size: 13px;
+}
