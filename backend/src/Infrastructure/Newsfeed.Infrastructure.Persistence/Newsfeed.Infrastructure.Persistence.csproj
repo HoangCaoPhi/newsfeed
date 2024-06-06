@@ -7,13 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Newsfeed.Infrastructure\Newsfeed.Infrastructure.csproj" />
+    <Compile Remove="Idempotency\**" />
+    <Compile Remove="Repositories\**" />
+    <EmbeddedResource Remove="Idempotency\**" />
+    <EmbeddedResource Remove="Repositories\**" />
+    <None Remove="Idempotency\**" />
+    <None Remove="Repositories\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EntityConfigurations\" />
-    <Folder Include="Idempotency\" />
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\Newsfeed.Infrastructure\Newsfeed.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

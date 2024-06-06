@@ -9,9 +9,11 @@ public class LoginEndpoint : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("/login", async ([FromBody] LoginRequest request, IAuthenticationService authenticationService) =>
+        app.MapPost("/authentication/login", async ([FromBody] LoginRequest request, IAuthenticationService authenticationService) =>
         {
             return await authenticationService.LoginAsync(request);
-        });
+        })
+        .WithTags(EndpointSchema.Authentication)
+        .MapToApiVersion(1);
     }
 }

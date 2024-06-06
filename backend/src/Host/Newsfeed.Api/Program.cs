@@ -1,8 +1,9 @@
 using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using Newsfeed.Api;
+using Newsfeed.Api.ErrorHandling;
 using Newsfeed.Application;
 using Newsfeed.Infrastructure.Identity;
 using Newsfeed.Infrastructure.Identity.Models;
@@ -15,11 +16,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddEndpoints();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo
-    { Title = "Newsfeed API", Description = "A social media for enterprise buidling by hcphi and pmquan", Version = "v1" });
-});
 
 // add service layer
 builder.Services.AddInfrastructurePersistenceLayer(builder.Configuration);
@@ -28,20 +24,39 @@ builder.Services.AddApplicationLayer();
 
 builder.Services.AddMappingMapster();
 
-// add api version
-builder.Services.AddApiVersioning(config =>
+// Configure API Versioning
+builder.Services.AddApiVersioning(options =>
 {
-    // Specify the default API Version as 1.0
-    config.DefaultApiVersion = new ApiVersion(1, 0);
-    // If the client hasn't specified the API version in the request, use the default API version number 
-    config.AssumeDefaultVersionWhenUnspecified = true;
-    // Advertise the API versions supported for the particular endpoint
-    config.ReportApiVersions = true;
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new ApiVersion(1);
+    options.ReportApiVersions = true;
+    options.ApiVersionReader = new UrlSegmentApiVersionReader();
+}).AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'V";
+    options.SubstituteApiVersionInUrl = true;
+});
+
+// Configure Swagger (if using)
+builder.Services.AddSwaggerGen(options =>
+{
+    var provider = builder.Services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
+    foreach (var description in provider.ApiVersionDescriptions)
+    {
+        options.SwaggerDoc(description.GroupName, new Microsoft.OpenApi.Models.OpenApiInfo()
+        {
+            Title = $"A social media API with version {description.ApiVersion}, built by HCPHI",
+            Version = description.ApiVersion.ToString()
+        });
+    }
 });
 
 // Add services to the container.
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
@@ -49,7 +64,14 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+        foreach (var description in provider.ApiVersionDescriptions)
+        {
+            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+        }
+    });
 }
 
 app.UseHttpsRedirection();
@@ -72,6 +94,8 @@ using (var scope = app.Services.CreateScope())
     await DefaultAdmin.SeedAsync(userManager);
 }
 
+
+app.UseExceptionHandler();
 app.MapEndpoints();
 app.Run();
  
