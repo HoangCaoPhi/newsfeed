@@ -54,9 +54,20 @@ builder.Services.AddSwaggerGen(options =>
 // Add services to the container.
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+
 
 var app = builder.Build();
 
@@ -77,6 +88,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("AllowSpecificOrigin");
 
 // migration db
 using (var scope = app.Services.CreateScope())
