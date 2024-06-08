@@ -1,5 +1,6 @@
 ﻿using Newsfeed.Domain.AggregatesModel.CategoryAggregate;
 using Newsfeed.Domain.AggregatesModel.PostAggregate.Enums;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Newsfeed.Domain.AggregatesModel.PostAggregate;
@@ -10,10 +11,11 @@ public class Post : BaseEntity, IAggregateRoot
     [Required]
     public string Content { get; private set; }
 
-    private int _postType;
     public PostType PostType { get; private set; }
 
     public string? ThumbnailId { get; private set; }
+
+    public DisplayMode DisplayMode { get; private set; }
 
     [Required]
     public Author Author { get; private set; }
@@ -22,13 +24,50 @@ public class Post : BaseEntity, IAggregateRoot
 
     public IReadOnlyCollection<PostAttachment> PostAttachments => _postAttachments?.AsReadOnly();
 
-    public DisplayMode DisplayMode { get; private set; }
+    private readonly List<PostHashTag>? _postHashTags;
 
-    private readonly List<HashTag> _hashTags;
+    public IReadOnlyCollection<PostHashTag> PostHashTags => _postHashTags?.AsReadOnly();
 
-    public IReadOnlyCollection<HashTag> HashTags => _hashTags?.AsReadOnly();
+    private readonly List<PostCategory>? _postCategories;
 
-    private readonly List<Category>? _categories;
+    public IReadOnlyCollection<PostCategory> PostCategories => _postCategories?.AsReadOnly();
 
-    public IReadOnlyCollection<Category> Categories => _categories?.AsReadOnly();
+    private Post()
+    {
+        _postAttachments = [];
+        _postHashTags = [];
+        _postCategories = [];
+    }
+
+    public static Post CreatePost(string title,
+                             string postType,
+                             string thumbnailId,
+                             string displayMode,
+                             string content)
+    {
+        return new Post()
+        {
+            Title = title,
+            PostType = Enumeration.FromDisplayName<PostType>(postType),
+            ThumbnailId = thumbnailId,
+            DisplayMode = Enumeration.FromDisplayName<DisplayMode>(displayMode),
+            Author = Author.CreateAuthor("cde922a2-10cb-4149-ad0e-775a98663c2d", "Hoàng Cao Phi"),
+            Content = content
+        };
+    }
+
+    public void AddPostHashTags(IReadOnlyList<PostHashTag> hashTags)
+    {
+        _postHashTags.AddRange(hashTags);
+    }
+
+    public void AddPostAttachments(IReadOnlyList<PostAttachment> postAttachments)
+    {
+        _postAttachments.AddRange(postAttachments);
+    }
+
+    public void AddPostCategories(IReadOnlyList<PostCategory> postCategories)
+    {
+        _postCategories.AddRange(postCategories);
+    }
 }

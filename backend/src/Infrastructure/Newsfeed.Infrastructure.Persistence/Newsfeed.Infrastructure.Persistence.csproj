@@ -8,19 +8,12 @@
 
   <ItemGroup>
     <Compile Remove="Idempotency\**" />
-    <Compile Remove="Repositories\**" />
     <EmbeddedResource Remove="Idempotency\**" />
-    <EmbeddedResource Remove="Repositories\**" />
     <None Remove="Idempotency\**" />
-    <None Remove="Repositories\**" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Newsfeed.Infrastructure\Newsfeed.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-
   </ItemGroup>
 
 </Project>

@@ -23,6 +23,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Infrastructure\Newsfeed.Infrastructure.Identity\Newsfeed.Infrastructure.Identity.csproj" />
+		<ProjectReference Include="..\..\Infrastructure\Newsfeed.Infrastructure.Notification\Newsfeed.Infrastructure.Notification.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\Newsfeed.Infrastructure.Persistence\Newsfeed.Infrastructure.Persistence.csproj" />
 	</ItemGroup>
 

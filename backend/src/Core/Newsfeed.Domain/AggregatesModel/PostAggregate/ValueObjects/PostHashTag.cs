@@ -1,6 +1,6 @@
 ﻿
 namespace Newsfeed.Domain.AggregatesModel.PostAggregate;
-public class HashTag(string name) : ValueObject
+public class PostHashTag(string name) : ValueObject
 {
     public string Name { get; init; } = name;
 
