@@ -1,20 +1,21 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace Newsfeed.Domain.AggregatesModel.PostAggregate;
 
-namespace Newsfeed.Domain.AggregatesModel.PostAggregate;
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum PostType
+public class PostType : Enumeration
 {
     /// <summary>
     /// Chia sẻ
     /// </summary>
-    Share = 1,
+    public static PostType Share = new(1, nameof(Share));
     /// <summary>
     /// Tin tức
     /// </summary>
-    News = 2,
+    public static PostType News = new(2, nameof(News));
     /// <summary>
     /// Bình chọn
     /// </summary>
-    Poll = 3
+    public static PostType Poll = new(3, nameof(Poll));
+
+    protected PostType(int id, string name) : base(id, name)
+    {
+    }
 }
