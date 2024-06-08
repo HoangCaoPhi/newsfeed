@@ -27,9 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4C028363-F
 		Docs\docker-compose.yaml = Docs\docker-compose.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsfeed.Schedule", "Host\Newsfeed.Schedule\Newsfeed.Schedule.csproj", "{47B62A56-9BBC-44F8-B367-B39DD613D2BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Newsfeed.Schedule", "Host\Newsfeed.Schedule\Newsfeed.Schedule.csproj", "{47B62A56-9BBC-44F8-B367-B39DD613D2BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newsfeed.Queue", "Host\Newsfeed.Queue\Newsfeed.Queue.csproj", "{49E89DE4-7073-4D88-BBC7-DCE98DCD318F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Newsfeed.Queue", "Host\Newsfeed.Queue\Newsfeed.Queue.csproj", "{49E89DE4-7073-4D88-BBC7-DCE98DCD318F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Newsfeed.Infrastructure.Notification", "Infrastructure\Newsfeed.Infrastructure.Notification\Newsfeed.Infrastructure.Notification.csproj", "{A28D9F85-950B-49D7-9746-36D9D16327AF}"
 EndProject

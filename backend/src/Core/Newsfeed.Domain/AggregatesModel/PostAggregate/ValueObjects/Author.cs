@@ -10,5 +10,10 @@ public class Author(string AuthorId, string AuthorName) : ValueObject
     {
         yield return AuthorId;
         yield return AuthorName;
+    }    
+
+    public static Author CreateAuthor(string AuthorId, string AuthorName)
+    {
+        return new Author(AuthorId, AuthorName);
     }
 }

@@ -6,9 +6,8 @@ internal class ReactionConfiguration : IEntityTypeConfiguration<Reaction>
     public void Configure(EntityTypeBuilder<Reaction> builder)
     {
         builder.OwnsMany(x => x.UserReactions, options =>
-        {
-            options.ToTable(NewsfeedDbSchema.Reaction.TableName);
-            options.Property(x => x.Value).HasColumnName(NewsfeedDbSchema.Reaction.UserIdColumnName);
+        {            
+            options.Property(x => x.Value).HasColumnName(NewsfeedDbSchema.Reaction.UserId);
             options.HasKey(NewsfeedDbSchema.KeyDefault);
         });
     }

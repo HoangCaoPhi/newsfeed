@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newsfeed.Domain.AggregatesModel.PostAggregate;
 using Newsfeed.Infrastructure.Persistence.Options;
+using Newsfeed.Infrastructure.Persistence.Repositories;
 
 namespace Newsfeed.Infrastructure.Persistence;
 
@@ -12,7 +14,10 @@ public static class ServiceExtensions
         services.AddDbAppContext(configuration);
         services.AddRepositories();
     }
-
+    private static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IPostRepository, PostRepository>();
+    }
     private static void AddDbAppContext(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<NewsfeedDbContext>(options =>
@@ -22,11 +27,10 @@ public static class ServiceExtensions
             {
                 dbOptions.EnableRetryOnFailure(databaseMySqlOptions.EnableRetryOnFailure);
             });
+
+            options.EnableSensitiveDataLogging();
         });
     }
 
-    private static void AddRepositories(this IServiceCollection services)
-    {
-         
-    }
+
 }

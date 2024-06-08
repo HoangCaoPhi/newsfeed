@@ -8,6 +8,7 @@ using Newsfeed.Application;
 using Newsfeed.Infrastructure.Identity;
 using Newsfeed.Infrastructure.Identity.Models;
 using Newsfeed.Infrastructure.Identity.Seeds;
+using Newsfeed.Infrastructure.Notification;
 using Newsfeed.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,7 @@ builder.Services.AddEndpoints();
 // add service layer
 builder.Services.AddInfrastructureIdentityLayer(builder.Configuration);
 builder.Services.AddInfrastructurePersistenceLayer(builder.Configuration);
-builder.Services.AddInfrastructureIdentityLayer(builder.Configuration);
+builder.Services.AddInfrastructureNotificationLayer(builder.Configuration);
 builder.Services.AddApplicationLayer();
 
 builder.Services.AddMappingMapster();
@@ -53,7 +54,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 // Add services to the container.
-builder.Services.AddAuthentication();
+//builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 builder.Services.AddCors(options =>
 {

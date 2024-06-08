@@ -5,19 +5,19 @@ public class NewsfeedDbSchema
 
     public static class Category
     {
-        public const string TableName = "Categories";
+        public const string Categories = "Categories";
     }
 
     public static class Post
     {
-        public const string TableName = "Posts";
-        public const string CategoryIdTableName = "PostCategoryIds";
-        public const string CategoryIdColumnName = "CategoryId";
+        public const string Posts = "Posts";
+        public const string PostCategoryIds = "PostCategoryIds";
+        public const string CategoryId = "CategoryId";
     }
 
     public static class Reaction
     {
-        public const string TableName = "ReactionUserIds";
-        public const string UserIdColumnName = "UserId";
+        public const string ReactionUserIds = "ReactionUserIds";
+        public const string UserId = "UserId";
     }
 }
