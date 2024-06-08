@@ -18,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddEndpoints();
 
 // add service layer
+builder.Services.AddInfrastructureIdentityLayer(builder.Configuration);
 builder.Services.AddInfrastructurePersistenceLayer(builder.Configuration);
 builder.Services.AddInfrastructureIdentityLayer(builder.Configuration);
 builder.Services.AddApplicationLayer();
@@ -86,7 +87,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
+app.UseAuthentication(); 
 app.UseAuthorization();
 app.UseCors("AllowSpecificOrigin");
 
