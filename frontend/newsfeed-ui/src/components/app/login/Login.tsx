@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
-export default function MyApp() {
+import { useNavigate } from "react-router-dom";
+
+export const Login = (props: any) => {
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword((show) => !show);
@@ -15,13 +18,15 @@ export default function MyApp() {
         setDataLogin((dataLogin) => dataLogin.map((x, index) => ({ ...x, Value: x.Key == data?.Key ? value : x.Value })))
     }
 
-    const login = () => {
-        // var paramSave = useState<object>({});
-        // var keySave = ["UserName", "PassWord"];
-        // keySave.forEach((key, x) => {
-        //     paramSave[`${key}`] = dataLogin.find((x) => x.IDInput == key)?.Value;
-        // })
-        // console.log(paramSave)
+    const login = async () => {
+        var res = await props.login({
+            Email: dataLogin[0].Value,
+            Password: dataLogin[1].Value
+        });
+        if (res && res.success) {
+            navigate('/newsfeed')
+        };
+        // if(res)
     }
 
 
@@ -61,7 +66,7 @@ export default function MyApp() {
         <div className="login flex content-center">
 
             <div className="login-ground">
-                <div className="login-item items-center"><div><h2>Đăng nhập</h2></div><div>{dataLogin.map((x) => InputResign(x))}</div> <Button sx={{
+                <div className="login-item items-center"><div><h2 className="text-xl pt-4 font-semibold">Đăng nhập</h2></div><div>{dataLogin.map((x) => InputResign(x))}</div> <Button sx={{
                     width: '100%',
                     marginTop: '8px',
                     backgroundColor: '#ee4d2d',
