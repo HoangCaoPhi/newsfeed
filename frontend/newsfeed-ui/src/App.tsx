@@ -1,11 +1,13 @@
 import { Authenticated, Refine, WelcomePage } from "@refinedev/core";
 import { dataProvider } from "./providers/data-provider";
 import { authProvider } from "./providers/auth-provider";
-import { Login } from "./pages/login";
+import { Login } from "./components/app/login/Login";
 import routerProvider from "@refinedev/react-router-v6";
 import { Navigate, Outlet, Route, Routes, BrowserRouter } from "react-router-dom";
 import { Header } from "./components";
-import { ListPosts } from "./pages/home/list";
+import {Newsfeed} from "./components/app/newsfeed/NewsFeed"
+import "./components/common/common.scss"
+import "./components/common/common.scss"
 
 export default function App() {
   return (
@@ -19,12 +21,11 @@ export default function App() {
           <Route
             element={
               <Authenticated key="protected" fallback={<Navigate to="/login" />}>
-                <Header />
                 <Outlet />
               </Authenticated>
             }
           >
-            <Route index element={<ListPosts />} />
+            <Route index element={<Login />} />
           </Route>
 
           <Route
@@ -34,10 +35,15 @@ export default function App() {
               </Authenticated>
             }
           >
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login login={authProvider.login} />} />
+            <Route path="/resign" element={<Login login={authProvider.login} />} />
+            <Route path="/newsfeed" element={<Newsfeed/>} />
+
           </Route>
         </Routes>
       </Refine>
     </BrowserRouter>
+
+
   );
 }
