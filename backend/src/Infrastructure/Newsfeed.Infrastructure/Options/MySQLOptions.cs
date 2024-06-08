@@ -5,5 +5,7 @@ public class MySQLOptions
 
     public required string ConnectionString { get; set; }
 
+    public required string NotificationDbConnectionString { get; set; }
+
     public int EnableRetryOnFailure { get; set; }
 }

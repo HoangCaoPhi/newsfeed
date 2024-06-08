@@ -1,4 +1,5 @@
 ﻿using Newsfeed.Domain.AggregatesModel.CategoryAggregate;
+using Newsfeed.Domain.AggregatesModel.PostAggregate.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Newsfeed.Domain.AggregatesModel.PostAggregate;
@@ -9,6 +10,7 @@ public class Post : BaseEntity, IAggregateRoot
     [Required]
     public string Content { get; private set; }
 
+    private int _postType;
     public PostType PostType { get; private set; }
 
     public string? ThumbnailId { get; private set; }
@@ -20,7 +22,7 @@ public class Post : BaseEntity, IAggregateRoot
 
     public IReadOnlyCollection<PostAttachment> PostAttachments => _postAttachments?.AsReadOnly();
 
-    public PostStatus PostStatus { get; private set; }
+    public DisplayMode DisplayMode { get; private set; }
 
     private readonly List<HashTag> _hashTags;
 
