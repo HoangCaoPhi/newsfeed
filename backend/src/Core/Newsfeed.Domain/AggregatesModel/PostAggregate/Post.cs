@@ -1,10 +1,8 @@
-﻿using Newsfeed.Domain.AggregatesModel.CategoryAggregate;
-using Newsfeed.Domain.AggregatesModel.PostAggregate.Enums;
-using System.Collections.Generic;
+﻿using Newsfeed.Domain.AggregatesModel.PostAggregate.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Newsfeed.Domain.AggregatesModel.PostAggregate;
-public class Post : BaseEntity, IAggregateRoot
+public class Post : BaseEntity, IAggregateRoot, IRecordHistory
 {
     public string? Title { get; private set; }
 
@@ -31,6 +29,12 @@ public class Post : BaseEntity, IAggregateRoot
     private readonly List<PostCategory>? _postCategories;
 
     public IReadOnlyCollection<PostCategory> PostCategories => _postCategories?.AsReadOnly();
+
+    public DateTime? Created { get; set; }
+    public string CreatedBy { get; set; }
+    public DateTime? Modified { get; set; }
+    public string ModifiedBy { get; set; }
+    public Guid EditVersion { get; set; }
 
     private Post()
     {

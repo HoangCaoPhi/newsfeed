@@ -183,7 +183,8 @@ public class AuthenticationService(UserManager<ApplicationUser> userManager,
             audience: _jwtOptions.Audience,
             claims: claims,
             expires: DateTime.UtcNow.AddMinutes(_jwtOptions.DurationInMinutes),
-            signingCredentials: signingCredentials);
+            signingCredentials: signingCredentials
+        );
     }
     #endregion
 

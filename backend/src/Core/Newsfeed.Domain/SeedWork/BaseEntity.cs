@@ -1,4 +1,5 @@
-﻿namespace Newsfeed.Domain.SeedWork;
+﻿
+namespace Newsfeed.Domain.SeedWork;
 public class BaseEntity
 {
     int? _requestedHashCode;
@@ -18,7 +19,7 @@ public class BaseEntity
     private List<INotification> _domainEvents = [];
 
     public IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
- 
+
     public void AddDomainEvent(INotification domainEvent)
     {
         _domainEvents ??= [];

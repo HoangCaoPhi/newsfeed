@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Newsfeed.Infrastructure.Persistence;
 
@@ -10,9 +11,11 @@ using Newsfeed.Infrastructure.Persistence;
 namespace Newsfeed.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(NewsfeedDbContext))]
-    partial class NewsfeedDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240609125746_Add_Audiable_Entity")]
+    partial class Add_Audiable_Entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

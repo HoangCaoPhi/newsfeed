@@ -1,3 +1,36 @@
-# For more info on HTTP files go to https://aka.ms/vs/httpfile
+﻿# For more info on HTTP files go to https://aka.ms/vs/httpfile
 
+POST {{HostAddress}}/post
+Content-Type: application/json
+Authorization: {{Token}}
 
+{
+	"title": "Tiêu đề bài viết",
+	"content": "Nội dung bài viết",
+	"postType": "News",
+	"thumbnailId": "cde922a2-10cb-4149-ad0e-775a98663c2d.jpg",
+	"postAttachments": [
+		{
+			"postAttachmentName": "Tài liệu ban hành số 01",
+			"postAttachmentExtension": ".pdf",
+			"postAttachmentType": 1
+		}
+	],
+	"displayMode": "Public",
+	"postHashTags": [
+		{
+			"name": "netcore"
+		},
+		{
+			"name": "c#"
+		}
+	],
+	"postCategories": [
+		{
+			"CategoryName": "Công nghệ thông tin"
+		},
+		{
+			"CategoryName": "Kinh tế"
+		}
+	]
+}

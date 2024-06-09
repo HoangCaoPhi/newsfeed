@@ -14,6 +14,7 @@ public class CreatePostEndpoint : IEndpoint
             return result;
         })
         .MapToApiVersion(1)
+        .RequireAuthorization()
         .WithTags("Post");
     }
 }
