@@ -1,6 +1,4 @@
 ﻿using Newsfeed.Domain.AggregatesModel.PostAggregate;
-using Newsfeed.Domain.AggregatesModel.PostAggregate.Enums;
-using Newsfeed.Domain.SeedWork;
 
 namespace Newsfeed.Infrastructure.Persistence.EntityConfigurations;
 internal class PostConfiguration : IEntityTypeConfiguration<Post>
@@ -9,17 +7,20 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
     {
         builder.OwnsOne(x => x.Author);
 
-        builder.Property(e => e.PostType)
-         .HasConversion(
-             v => v.Name,
-             v => Enumeration.FromDisplayName<PostType>(v))
-         .HasMaxLength(255);
+        builder.OwnsOne(x => x.PostType);
+        builder.OwnsOne(x => x.DisplayMode);
 
-        builder.Property(e => e.DisplayMode)
-         .HasConversion(
-             v => v.Name,
-             v => Enumeration.FromDisplayName<DisplayMode>(v))
-         .HasMaxLength(255);
+        //builder.Property(e => e.PostType)
+        // .HasConversion(
+        //     v => v.Name,
+        //     v => Enumeration.FromDisplayName<PostType>(v))
+        // .HasMaxLength(255);
+
+        //builder.Property(e => e.DisplayMode)
+        // .HasConversion(
+        //     v => v.Name,
+        //     v => Enumeration.FromDisplayName<DisplayMode>(v))
+        // .HasMaxLength(255);
  
         builder.OwnsMany(x => x.PostAttachments, options =>
         {
