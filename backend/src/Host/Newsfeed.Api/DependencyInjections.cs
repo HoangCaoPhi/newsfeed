@@ -3,7 +3,6 @@ using Asp.Versioning.Builder;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Newsfeed.Api.Abstractions;
 using System.Reflection;
 
 namespace Newsfeed.Api;

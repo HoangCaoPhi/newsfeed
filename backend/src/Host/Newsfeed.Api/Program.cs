@@ -18,6 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddEndpoints();
 
+builder.Services.AddHttpContextAccessor();
+
 // add service layer
 builder.Services.AddInfrastructureIdentityLayer(builder.Configuration);
 builder.Services.AddInfrastructurePersistenceLayer(builder.Configuration);

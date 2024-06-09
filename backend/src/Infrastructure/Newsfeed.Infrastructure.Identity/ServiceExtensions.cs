@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newsfeed.Application.Interfaces;
 using Newsfeed.Application.Services;
 using Newsfeed.Application.Wrappers;
 using Newsfeed.Infrastructure.Identity.Implements;
@@ -31,6 +32,12 @@ public static class ServiceExtensions
         services.AddServices();
     }
 
+    private static void AddServices(this IServiceCollection services)
+    {
+        services.AddTransient<IAuthenticationService, AuthenticationService>();
+        services.AddScoped<IUserContext, UserContext>();
+    }
+
     private static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<IdentityDbAppContext>(options =>
@@ -43,10 +50,7 @@ public static class ServiceExtensions
         });
     }
 
-    private static void AddServices(this IServiceCollection services)
-    {
-        services.AddTransient<IAuthenticationService, AuthenticationService>();
-    }
+
 
     private static void AddIdentityConfig(this IServiceCollection services)
     {
