@@ -1,5 +1,6 @@
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
+using MassTransit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newsfeed.Api;
@@ -53,6 +54,18 @@ builder.Services.AddSwaggerGen(options =>
             Version = description.ApiVersion.ToString()
         });
     }
+});
+
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "rabbitmq", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+    });
 });
 
 // Add services to the container.
