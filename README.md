@@ -12,15 +12,18 @@ A private social media platform for enterprises includes the following functions
     + Add
     + Delete
 + Group management
++ Manage User and Role
++ Authentication and Authorization
  
-The project is developed following the **Domain Driven Design**  approach, with **Onion Clean Architecture**, **CQRS pattern** and using the follow libraries:
+The project is developed following the [**Domain Driven Design**](https://learn.microsoft.com/en-us/archive/msdn-magazine/2009/february/best-practice-an-introduction-to-domain-driven-design)  approach, with [**Onion Clean Architecture**](https://code-maze.com/onion-architecture-in-aspnetcore/), [**CQRS pattern**](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs) and using the follow libraries:
 
-+ **MediatR**
-+ **SignalR** for bell notification
-+ RabbitMQ using **Masstransit** library
-+ Schedule tasks with **Quartz.Net** library
-+ **Identity** for authentication and authorization
-+ ORM **Entity Framework Core** for database manipulation
++ [**MediatR**](https://github.com/jbogard/MediatR)
++ [**SignalR**](https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-8.0) for bell notification
++ [**RabbitMQ**](https://www.rabbitmq.com/) using [**Masstransit**](https://masstransit.io/) library
++ Schedule tasks with [**Quartz.Net**](https://www.quartz-scheduler.net/) library
++ [**Identity**](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-8.0&tabs=visual-studio) for authentication and authorization
++ ORM [**Entity Framework Core**](https://learn.microsoft.com/en-us/ef/core/) for database manipulation
++ Distribution Cache with [**Redis**](https://redis.io/) and [**Cache in-memory**](https://learn.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-8.0)
 
 
 
