@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newsfeed.Domain.AggregatesModel.PostAggregate;
+using Newsfeed.Domain.SeedWork;
 using Newsfeed.Infrastructure.Persistence.Options;
 using Newsfeed.Infrastructure.Persistence.Repositories;
 
@@ -17,6 +18,7 @@ public static class ServiceExtensions
     private static void AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<IPostRepository, PostRepository>();
+        services.AddScoped<INewsfeedReadDbContext, NewsfeedDbContext>();
     }
     private static void AddDbAppContext(this IServiceCollection services, IConfiguration configuration)
     {

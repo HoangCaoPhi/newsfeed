@@ -47,9 +47,12 @@ public class Post : BaseEntity, IAggregateRoot, IRecordHistory
                              string postType,
                              string thumbnailId,
                              string displayMode,
-                             string content)
+                             string content,
+                             List<PostHashTag> postHashTags,
+                             List<PostAttachment> postAttachments,
+                             List<PostCategory> postCategories)
     {
-        return new Post()
+        var post = new Post()
         {
             Title = title,
             PostType = Enumeration.FromDisplayName<PostType>(postType),
@@ -58,6 +61,12 @@ public class Post : BaseEntity, IAggregateRoot, IRecordHistory
             Author = Author.CreateAuthor("cde922a2-10cb-4149-ad0e-775a98663c2d", "Hoàng Cao Phi"),
             Content = content
         };
+
+        post.AddPostHashTags(postHashTags);
+        post.AddPostCategories(postCategories);
+        post.AddPostAttachments(postAttachments);
+
+        return post;
     }
 
     public void AddPostHashTags(IReadOnlyList<PostHashTag> hashTags)
@@ -72,6 +81,29 @@ public class Post : BaseEntity, IAggregateRoot, IRecordHistory
 
     public void AddPostCategories(IReadOnlyList<PostCategory> postCategories)
     {
+        _postCategories.AddRange(postCategories);
+    }
+
+    public void UpdatePost(string title,
+                             string thumbnailId,
+                             string displayMode,
+                             string content,
+                             List<PostHashTag> postHashTags,
+                             List<PostAttachment> postAttachments,
+                             List<PostCategory> postCategories)
+    {
+        Title = title;
+        ThumbnailId = thumbnailId;
+        DisplayMode = Enumeration.FromDisplayName<DisplayMode>(displayMode);
+        Content = content;
+
+        _postHashTags.Clear();
+        _postHashTags.AddRange(postHashTags);
+
+        _postAttachments.Clear();
+        _postAttachments.AddRange(postAttachments);
+
+        _postCategories.Clear();
         _postCategories.AddRange(postCategories);
     }
 }

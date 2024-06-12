@@ -5,7 +5,7 @@ using Newsfeed.Domain.SeedWork;
 
 namespace Newsfeed.Infrastructure.Persistence;
 public class NewsfeedDbContext(DbContextOptions<NewsfeedDbContext> options,
-    IUserContext userContext) : DbContext(options), IUnitOfWork
+    IUserContext userContext) : DbContext(options), IUnitOfWork, INewsfeedReadDbContext
 {
     public Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
     {
