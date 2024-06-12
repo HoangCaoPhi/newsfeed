@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newsfeed.Application.Features.Posts.CreatePostCommand;
+using Newsfeed.Application.Features.Posts.Commands.CreatePostCommand;
 
 namespace Newsfeed.Api.Endpoints.Posts.CreatePost;
 
